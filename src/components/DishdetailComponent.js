@@ -31,6 +31,7 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
                 isModalOpen: false
             };
             this.toggleModal = this.toggleModal.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
             
         }
 
@@ -40,6 +41,11 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
             });
         }
        
+        handleSubmit(values){
+            this.toggleModal();
+            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        }
+
         render(){
             return(
                 <React.Fragment>
@@ -50,7 +56,7 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                         <ModalBody>
-                            <LocalForm onSubmit={this.toggleModal}>
+                            <LocalForm onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <Label htmlFor="rating">Rating</Label>
                                         <Control.select model=".rating" id="rating" name="rating" 
@@ -96,7 +102,7 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
     }
 
 
-    function RenderComments({allComments}){
+    function RenderComments({allComments, addComment, dishId}){
         
           if(allComments!=null){
             const comments = allComments.map((comment)=>{
@@ -127,7 +133,7 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
                 <div>
                     <h4>Comments</h4>
                     {comments}
-                    <CommentComponent/>
+                    <CommentComponent dishId={dishId} addComment={addComment}/>
                 </div>
             );
 
@@ -157,8 +163,10 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
                         </div>
                     </div>
                     <div className="row">
-                            <RenderDish dish={props.dish}/>
-                            <RenderComments allComments = {props.comments}/>
+                        <RenderDish dish={props.dish}/>
+                        <RenderComments allComments = {props.comments}
+                        addComment={props.addComment}
+                        dishId={props.dish.id}/>
                         
                     </div>
                     

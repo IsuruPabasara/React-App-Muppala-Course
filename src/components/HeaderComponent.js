@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, 
     Collapse, NavItem, Jumbotron, Button, Modal,
     ModalHeader, ModalBody, FormGroup, Input, Label,
@@ -84,7 +84,7 @@ class Header extends React.Component{
                     </div>
                 </div>
                 </Jumbotron>
-                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} >
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleLogin}>

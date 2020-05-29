@@ -45,7 +45,7 @@ import {baseUrl} from '../shared/baseUrl';
        
         handleSubmit(values){
             this.toggleModal();
-            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         }
 
         render(){
@@ -104,7 +104,7 @@ import {baseUrl} from '../shared/baseUrl';
     }
 
 
-    function RenderComments({allComments, addComment, dishId}){
+    function RenderComments({allComments, postComment, dishId}){
         
           if(allComments!=null){
             const comments = allComments.map((comment)=>{
@@ -130,7 +130,7 @@ import {baseUrl} from '../shared/baseUrl';
                 <div>
                     <h4>Comments</h4>
                     {comments}
-                    <CommentComponent dishId={dishId} addComment={addComment}/>
+                    <CommentComponent dishId={dishId} postComment={postComment}/>
                 </div>
             );
 
@@ -180,7 +180,7 @@ import {baseUrl} from '../shared/baseUrl';
                     <div className="row">
                         <RenderDish dish={props.dish}/>
                         <RenderComments allComments = {props.comments}
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         dishId={props.dish.id}/>
                         
                     </div>

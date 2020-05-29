@@ -13,7 +13,7 @@ import {actions} from 'react-redux-form';
 
 const mapStateToProps = state => {
     return{
-      dishes:state.dishes,
+      dishes: state.dishes,
       comments: state.comments,
       promotions: state.promotions,
       leaders: state.leaders
@@ -43,7 +43,7 @@ class Main extends React.Component {
         <Home 
             dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
             dishesLoading={this.props.dishes.isLoading}
-            dishErrMess={this.props.dishes.errMess}
+            dishesErrMess={this.props.dishes.errMess}
             promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
             promoLoading={this.props.promotions.isLoading}
             promoErrMess={this.props.promotions.errMess}

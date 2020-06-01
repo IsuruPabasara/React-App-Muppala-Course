@@ -9,17 +9,17 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
+
+
+
 class Contact extends React.Component{
     constructor(props){
         super(props);
-        
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     
     handleSubmit(values){
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
     }
 
@@ -59,7 +59,7 @@ class Contact extends React.Component{
                     <div className="col-12 col-sm-11 offset-sm-1">
                         <div className="btn-group" role="group">
                             <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                            <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                            <a role="button" className="btn btn-info" href="skype"><i className="fa fa-skype"></i> Skype</a>
                             <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ class Contact extends React.Component{
                         <h3>Send us Your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
+                        <Form model="feedback" onSubmit={this.handleSubmit}>
                             <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -158,7 +158,7 @@ class Contact extends React.Component{
                                 <Col md={{size:6,offset:2}}>
                                     <div className="form-check">
                                         <Label check>
-                                            <Control.checkbox model=".agree" name="agree"
+                                            <Control.checkbox model=".agree" id="agree" name="agree"
                                             className="form-check-input"
                                             />{' '}
                                             <strong>May we contact you?</strong>
@@ -166,7 +166,7 @@ class Contact extends React.Component{
                                     </div>
                                 </Col>
                                 <Col md={{size:3,offset:1}}>
-                                    <Control.select model=".contactType" name="contactType"
+                                    <Control.select model=".contactType" id="contactType" name="contactType"
                                     className="form-control">
                                         <option>Tel.</option>
                                         <option>Email</option>

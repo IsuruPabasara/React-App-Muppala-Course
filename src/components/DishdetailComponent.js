@@ -40,7 +40,6 @@ import { FadeTransform, Fade, Stagger} from "react-animation-components";
             };
             this.toggleModal = this.toggleModal.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
-            
         }
 
         toggleModal() {
